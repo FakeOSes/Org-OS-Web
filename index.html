@@ -6,27 +6,369 @@
 <meta name="theme-color" content="#0b1020">
 <link rel="icon" type="image/png" href="./images.png">
 <title>ORG OS Website</title>
+<script>
+document.documentElement.classList.add("js");
+</script>
 <style>
-:root{color-scheme:dark;--bg:#080d19;--panel:#111a2b;--line:#26344b;--muted:#9aa9c0;--text:#f4f7ff;--blue:#79a7ff;--purple:#b39aff}
-*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 15% 0%,#1b3261 0,transparent 43%),radial-gradient(ellipse at 100% 20%,#35215c 0,transparent 35%),var(--bg);font-family:Segoe UI,Inter,system-ui,sans-serif;color:var(--text)}
-main{width:min(920px,calc(100% - 32px));margin:0 auto;padding:42px 0 60px}.top{display:flex;align-items:center;gap:12px;margin-bottom:38px}.logo{display:grid;place-items:center;width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,#192947,#101b2f);border:1px solid #6d8de344;overflow:hidden;box-shadow:0 14px 30px rgba(12,16,31,.45)}.logo img{display:block;width:100%;height:100%;object-fit:contain}.brand{display:flex;flex-direction:column;line-height:1.05;font-weight:700;letter-spacing:.02em}.brand strong{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}.hero{padding:34px;border:1px solid #6d8de344;border-radius:24px;background:linear-gradient(135deg,#172745eF,#15192bea);box-shadow:0 24px 70px #0003}.eyebrow{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#cfe0ff}.hero h1{margin:18px 0 12px;font-size:clamp(2.3rem,4vw,4rem);letter-spacing:-.06em;line-height:1}.hero p{margin:0;color:#d4deef;max-width:62ch}.status{display:inline-flex;align-items:center;gap:12px;margin-top:22px;padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);font-size:14px}.dot{width:9px;height:9px;border-radius:50%;background:#f5bd58;box-shadow:0 0 0 6px rgba(245,189,88,.18)}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}.button{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 16px;border-radius:12px;border:1px solid #c7d7ff30;background:rgba(255,255,255,.04);color:var(--text);text-decoration:none;font-weight:700;cursor:pointer;transition:.15s ease}.button:hover{transform:translateY(-1px);border-color:#c7d7ff50}.button.primary{background:linear-gradient(135deg,#7aa8ff,#486fe8);border-color:transparent;color:#081321}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:24px}.card{padding:22px;border:1px solid #26344b;border-radius:18px;background:rgba(255,255,255,.03)}.card h2{margin:0 0 10px;font-size:1.1rem}.card p,.card li{color:#d0d9ee;line-height:1.6}.card ul{margin:10px 0 0 18px;padding:0}.releases{padding:22px}.releases h2{margin:0 0 12px}.release-item{padding:16px;border:1px solid #2c3d5a;border-radius:14px;background:rgba(255,255,255,.02);margin-top:12px}.release-item h3{margin:0 0 6px;font-size:1.05rem}.release-meta{display:flex;flex-wrap:wrap;gap:8px 12px;margin:8px 0 10px;font-size:12px;color:var(--muted)}.release-item a,.foot a{color:#b8ceff;text-decoration:none}.release-item a:hover,.foot a:hover{text-decoration:underline}.foot{margin-top:30px;color:var(--muted);font-size:12px;text-align:center}.empty-state{color:var(--muted)}@media(max-width:720px){main{padding-top:32px}.grid{grid-template-columns:1fr}.hero{padding:24px}.brand strong{letter-spacing:.12em}} 
+:root {
+  color-scheme: dark;
+  --bg:#080d19;
+  --panel:#111a2b;
+  --line:#26344b;
+  --muted:#9aa9c0;
+  --text:#f4f7ff;
+  --blue:#79a7ff;
+  --purple:#b39aff;
+}
+* { box-sizing:border-box; }
+html {
+  scroll-behavior:smooth;
+}
+body {
+  margin:0;
+  min-height:100vh;
+  background:
+    radial-gradient(ellipse at 15% 0%,#1b3261 0,transparent 43%),
+    radial-gradient(ellipse at 100% 20%,#35215c 0,transparent 35%),
+    var(--bg);
+  font-family:Segoe UI,Inter,system-ui,sans-serif;
+  color:var(--text);
+}
+main {
+  width:min(920px,calc(100% - 32px));
+  margin:0 auto;
+  padding:42px 0 60px;
+}
+.top {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:38px;
+}
+.logo {
+  display:grid;
+  place-items:center;
+  width:44px;
+  height:44px;
+  border-radius:14px;
+  background:linear-gradient(135deg,#192947,#101b2f);
+  border:1px solid #6d8de344;
+  overflow:hidden;
+  box-shadow:0 14px 30px rgba(12,16,31,.45);
+}
+.logo img {
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+.brand {
+  display:flex;
+  flex-direction:column;
+  line-height:1.05;
+  font-weight:700;
+  letter-spacing:.02em;
+}
+.brand strong {
+  font-size:11px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--muted);
+  font-weight:700;
+}
+.hero {
+  padding:34px;
+  border:1px solid #6d8de344;
+  border-radius:24px;
+  background:linear-gradient(135deg,#172745ef,#15192bea);
+  box-shadow:0 24px 70px #0003;
+}
+.eyebrow {
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:#cfe0ff;
+}
+.hero h1 {
+  margin:18px 0 12px;
+  font-size:clamp(2.3rem,4vw,4rem);
+  letter-spacing:-.06em;
+  line-height:1;
+}
+.hero p {
+  margin:0;
+  color:#d4deef;
+  max-width:62ch;
+}
+.status {
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  margin-top:22px;
+  padding:10px 14px;
+  border-radius:999px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  font-size:14px;
+}
+.dot {
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:#f5bd58;
+  box-shadow:0 0 0 6px rgba(245,189,88,.18);
+}
+.actions {
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:22px;
+}
+.button {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:12px 16px;
+  border-radius:12px;
+  border:1px solid #c7d7ff30;
+  background:rgba(255,255,255,.04);
+  color:var(--text);
+  text-decoration:none;
+  font-weight:700;
+  cursor:pointer;
+  transition:
+    transform .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+.button:hover {
+  transform:translateY(-4px);
+  border-color:#c7d7ff80;
+  box-shadow:0 10px 25px #0004;
+}
+.button.primary {
+  background:linear-gradient(135deg,#7aa8ff,#486fe8);
+  border-color:transparent;
+  color:#081321;
+}
+.grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
+  margin-top:24px;
+}
+.card {
+  padding:22px;
+  border:1px solid #26344b;
+  border-radius:18px;
+  background:rgba(255,255,255,.03);
+  transition:
+    transform .25s ease,
+    border-color .25s ease,
+    background .25s ease;
+}
+.card:hover {
+  transform:translateY(-5px);
+  border-color:#5875a8;
+  background:rgba(255,255,255,.055);
+}
+.card h2 {
+  margin:0 0 10px;
+  font-size:1.1rem;
+}
+.card p,
+.card li {
+  color:#d0d9ee;
+  line-height:1.6;
+}
+.card ul {
+  margin:10px 0 0 18px;
+  padding:0;
+}
+.releases {
+  padding:22px;
+}
+.releases h2 {
+  margin:0 0 12px;
+}
+.release-item {
+  padding:16px;
+  border:1px solid #2c3d5a;
+  border-radius:14px;
+  background:rgba(255,255,255,.02);
+  margin-top:12px;
+}
+.release-item h3 {
+  margin:0 0 6px;
+  font-size:1.05rem;
+}
+.release-meta {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 12px;
+  margin:8px 0 10px;
+  font-size:12px;
+  color:var(--muted);
+}
+.release-item a,
+.foot a {
+  color:#b8ceff;
+  text-decoration:none;
+}
+.release-item a:hover,
+.foot a:hover {
+  text-decoration:underline;
+}
+.foot {
+  margin-top:30px;
+  color:var(--muted);
+  font-size:12px;
+  text-align:center;
+}
+.empty-state {
+  color:var(--muted);
+}
+/* SCROLL ANIMATIONS */
+.js .reveal {
+  opacity:0;
+  transform:translateY(35px);
+  transition:
+    opacity .75s ease,
+    transform .75s cubic-bezier(.2,.7,.2,1);
+  will-change:opacity,transform;
+}
+.js .reveal.is-visible {
+  opacity:1;
+  transform:translateY(0);
+}
+/* Hero entrance */
+.hero {
+  animation:heroEnter .9s cubic-bezier(.2,.7,.2,1) both;
+}
+@keyframes heroEnter {
+  from {
+    opacity:0;
+    transform:translateY(30px) scale(.98);
+  }
+  to {
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+/* Slight stagger between cards */
+.grid .card:nth-child(2) {
+  transition-delay:.12s;
+}
+/* Mobile */
+@media(max-width:720px) {
+  main { padding-top:32px; }
+  .grid { grid-template-columns:1fr; }
+  .hero { padding:24px; }
+  .brand strong { letter-spacing:.12em; }
+}
+/* Accessibility */
+@media(prefers-reduced-motion:reduce) {
+  html { scroll-behavior:auto; }
+  *,
+  *::before,
+  *::after {
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+    scroll-behavior:auto !important;
+  }
+  .js .reveal {
+    opacity:1;
+    transform:none;
+  }
+}
 </style>
+</head>
+<body>
 <main>
-<header class="top"><div class="logo"><img src="./images.png" alt="ORG OS Website logo"></div><div class="brand">ORG OS Website<strong>The Main Website</strong></div></header>
+<header class="top reveal">
+  <div class="logo">
+    <img src="./images.png" alt="ORG OS Website logo">
+  </div>
+  <div class="brand">
+    ORG OS Website
+    <strong>The Main Website</strong>
+  </div>
+</header>
 <section class="hero">
-<div class="eyebrow">Website Info · ORG OS</div>
-<h1>About Us</h1>
-<p>This is our website for the doc and more, not the OS. Click the "OS" button for the OS.</p>
-<div class="status"><span class="dot" id="status-dot"></span><span id="status-text">Cool Pill · WOW</span></div>
-<div class="actions"><a class="button primary" href="https://Org-os-qwerty.vercel.app" target="_blank" rel="noreferrer">Our OS</a><a class="button" href="https://docs.google.com/document/d/1xER1nLe8qbM0OJMBdmzO7BzppauIUi7okF37WQ-Y78Y/edit?usp=sharing" target="_blank" rel="noreferrer">Our Docs</a></div>
+  <div class="eyebrow">Website Info · ORG OS</div>
+  <h1>About Us</h1>
+  <p>This is our website for the doc and more, not the OS. Click the "OS" button for the OS.</p>
+  <div class="status">
+    <span class="dot" id="status-dot"></span>
+    <span id="status-text">Cool Pill · WOW</span>
+  </div>
+  <div class="actions">
+    <a class="button primary"
+       href="https://Org-os-qwerty.vercel.app"
+       target="_blank"
+       rel="noreferrer">Our OS</a>
+    <a class="button"
+       href="https://docs.google.com/document/d/1xER1nLe8qbM0OJMBdmzO7BzppauIUi7okF37WQ-Y78Y/edit?usp=sharing"
+       target="_blank"
+       rel="noreferrer">Our Docs</a>
+  </div>
 </section>
 <div class="grid">
-<section class="card"><h2>Is this our permanent website?</h2><p>Welllllllllll No the url will change soon when we release PRO and earn enough.</p></section>
-<section class="card"><h2>How do I request stuff</h2><p>On the ORG OS doc go to Org OS then click the "Request" subtab and comment on the text but songs do it on Org Music tab scroll down and comment on its text.</p></section>
+  <section class="card reveal">
+    <h2>Is this our permanent website?</h2>
+    <p>Welllllllllll No the url will change soon when we release PRO and earn enough.</p>
+  </section>
+  <section class="card reveal">
+    <h2>How do I request stuff</h2>
+    <p>On the ORG OS doc go to Org OS then click the "Request" subtab and comment on the text but songs do it on Org Music tab scroll down and comment on its text.</p>
+  </section>
 </div>
-<section class="card releases" aria-live="polite" style="margin-top:16px"><h2>Will we shut down?</h2><div id="release-list"><p>HELL NOOOO WTF WOULD YOU THINK WE WOULD SHUT DOWN</p></div></section>
-<section class="card releases" aria-live="polite" style="margin-top:16px"><h2>Are we peak</h2><div id="release-list"><p>HELL YAAAA</p></div></section>
-<div class="foot">ORG OS · Official Website</div>
+<section class="card releases reveal"
+         style="margin-top:16px"
+         aria-live="polite">
+  <h2>Will we shut down?</h2>
+  <div id="shutdown-answer">
+    <p>HELL NOOOO WTF WOULD YOU THINK WE WOULD SHUT DOWN</p>
+  </div>
+</section>
+<section class="card releases reveal"
+         style="margin-top:16px"
+         aria-live="polite">
+  <h2>Are we peak</h2>
+  <div id="peak-answer">
+    <p>HELL YAAAA</p>
+  </div>
+</section>
+<div class="foot reveal">
+  ORG OS · Official Website
+</div>
 </main>
+<script>
+/* Scroll reveal observer */
+const revealElements = document.querySelectorAll(".reveal");
+if ("IntersectionObserver" in window) {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.12,
+    rootMargin: "0px 0px -40px 0px"
+  });
+  revealElements.forEach(element => {
+    observer.observe(element);
+  });
+} else {
+  revealElements.forEach(element => {
+    element.classList.add("is-visible");
+  });
+}
+</script>
 </body>
 </html>
