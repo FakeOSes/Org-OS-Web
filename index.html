@@ -11,7 +11,7 @@ document.documentElement.classList.add("js");
 </script>
 <style>
 :root {
-  color-scheme: dark;
+  color-scheme:dark;
   --bg:#080d19;
   --panel:#111a2b;
   --line:#26344b;
@@ -21,18 +21,47 @@ document.documentElement.classList.add("js");
   --purple:#b39aff;
 }
 * { box-sizing:border-box; }
-html {
-  scroll-behavior:smooth;
-}
+html { scroll-behavior:smooth; }
 body {
   margin:0;
   min-height:100vh;
+  isolation:isolate;
   background:
     radial-gradient(ellipse at 15% 0%,#1b3261 0,transparent 43%),
     radial-gradient(ellipse at 100% 20%,#35215c 0,transparent 35%),
     var(--bg);
   font-family:Segoe UI,Inter,system-ui,sans-serif;
   color:var(--text);
+  overflow-x:hidden;
+}
+/* Ambient background animation */
+body::before,
+body::after {
+  content:"";
+  position:fixed;
+  width:380px;
+  height:380px;
+  border-radius:50%;
+  filter:blur(100px);
+  opacity:.12;
+  pointer-events:none;
+  z-index:-1;
+  animation:ambient 12s ease-in-out infinite alternate;
+}
+body::before {
+  background:#477fff;
+  top:10%;
+  left:-200px;
+}
+body::after {
+  background:#a36bff;
+  right:-200px;
+  bottom:5%;
+  animation-delay:-6s;
+}
+@keyframes ambient {
+  from { transform:translate(0,0) scale(.9); }
+  to { transform:translate(100px,-60px) scale(1.3); }
 }
 main {
   width:min(920px,calc(100% - 32px));
@@ -74,7 +103,6 @@ main {
   letter-spacing:.14em;
   text-transform:uppercase;
   color:var(--muted);
-  font-weight:700;
 }
 .hero {
   padding:34px;
@@ -82,6 +110,17 @@ main {
   border-radius:24px;
   background:linear-gradient(135deg,#172745ef,#15192bea);
   box-shadow:0 24px 70px #0003;
+  animation:heroEnter .9s cubic-bezier(.2,.7,.2,1) both;
+}
+@keyframes heroEnter {
+  from {
+    opacity:0;
+    transform:translateY(30px) scale(.98);
+  }
+  to {
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
 }
 .eyebrow {
   font-size:11px;
@@ -101,23 +140,70 @@ main {
   color:#d4deef;
   max-width:62ch;
 }
+/* COOL PILL ANIMATION */
 .status {
   display:inline-flex;
   align-items:center;
   gap:12px;
   margin-top:22px;
-  padding:10px 14px;
+  padding:10px 16px;
   border-radius:999px;
   background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12);
   font-size:14px;
+  position:relative;
+  overflow:hidden;
+  animation:pillFloat 3s ease-in-out infinite;
+  box-shadow:0 0 20px rgba(121,167,255,.08);
+  transition:box-shadow .3s ease,border-color .3s ease;
+}
+.status:hover {
+  border-color:#79a7ff88;
+  box-shadow:0 0 25px rgba(121,167,255,.2);
+}
+.status::after {
+  content:"";
+  position:absolute;
+  top:0;
+  left:-120%;
+  width:70%;
+  height:100%;
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.13),
+    transparent
+  );
+  transform:skewX(-20deg);
+  animation:pillShine 5s ease-in-out infinite;
+}
+@keyframes pillFloat {
+  0%,100% { transform:translateY(0); }
+  50% { transform:translateY(-4px); }
+}
+@keyframes pillShine {
+  0%,65% { left:-120%; }
+  100% { left:150%; }
 }
 .dot {
   width:9px;
   height:9px;
+  flex-shrink:0;
   border-radius:50%;
   background:#f5bd58;
-  box-shadow:0 0 0 6px rgba(245,189,88,.18);
+  box-shadow:0 0 0 0 rgba(245,189,88,.5);
+  animation:dotPulse 2s ease-out infinite;
+}
+@keyframes dotPulse {
+  0% {
+    box-shadow:0 0 0 0 rgba(245,189,88,.5);
+  }
+  70% {
+    box-shadow:0 0 0 9px rgba(245,189,88,0);
+  }
+  100% {
+    box-shadow:0 0 0 0 rgba(245,189,88,0);
+  }
 }
 .actions {
   display:flex;
@@ -138,13 +224,10 @@ main {
   text-decoration:none;
   font-weight:700;
   cursor:pointer;
-  transition:
-    transform .2s ease,
-    border-color .2s ease,
-    box-shadow .2s ease;
+  transition:all .2s ease;
 }
 .button:hover {
-  transform:translateY(-4px);
+  transform:translateY(-4px) scale(1.02);
   border-color:#c7d7ff80;
   box-shadow:0 10px 25px #0004;
 }
@@ -152,6 +235,9 @@ main {
   background:linear-gradient(135deg,#7aa8ff,#486fe8);
   border-color:transparent;
   color:#081321;
+}
+.button.primary:hover {
+  box-shadow:0 8px 30px #6794ff55;
 }
 .grid {
   display:grid;
@@ -164,10 +250,7 @@ main {
   border:1px solid #26344b;
   border-radius:18px;
   background:rgba(255,255,255,.03);
-  transition:
-    transform .25s ease,
-    border-color .25s ease,
-    background .25s ease;
+  transition:transform .25s ease,border-color .25s ease,background .25s ease;
 }
 .card:hover {
   transform:translateY(-5px);
@@ -221,63 +304,57 @@ main {
 .foot a:hover {
   text-decoration:underline;
 }
+/* FOOTER - ALWAYS VISIBLE */
 .foot {
-  margin-top:30px;
+  margin-top:35px;
+  padding:20px 10px;
   color:var(--muted);
   font-size:12px;
   text-align:center;
+  opacity:1;
+  animation:footerEnter 1s ease both;
+  animation-delay:.5s;
 }
-.empty-state {
-  color:var(--muted);
+@keyframes footerEnter {
+  from {
+    opacity:0;
+    transform:translateY(12px);
+  }
+  to {
+    opacity:1;
+    transform:translateY(0);
+  }
 }
-/* SCROLL ANIMATIONS */
+/* SCROLL REVEALS */
 .js .reveal {
   opacity:0;
   transform:translateY(35px);
   transition:
     opacity .75s ease,
     transform .75s cubic-bezier(.2,.7,.2,1);
-  will-change:opacity,transform;
 }
 .js .reveal.is-visible {
   opacity:1;
   transform:translateY(0);
 }
-/* Hero entrance */
-.hero {
-  animation:heroEnter .9s cubic-bezier(.2,.7,.2,1) both;
-}
-@keyframes heroEnter {
-  from {
-    opacity:0;
-    transform:translateY(30px) scale(.98);
-  }
-  to {
-    opacity:1;
-    transform:translateY(0) scale(1);
-  }
-}
-/* Slight stagger between cards */
 .grid .card:nth-child(2) {
   transition-delay:.12s;
 }
-/* Mobile */
+/* MOBILE */
 @media(max-width:720px) {
   main { padding-top:32px; }
   .grid { grid-template-columns:1fr; }
   .hero { padding:24px; }
   .brand strong { letter-spacing:.12em; }
 }
-/* Accessibility */
+/* ACCESSIBILITY */
 @media(prefers-reduced-motion:reduce) {
   html { scroll-behavior:auto; }
   *,
   *::before,
   *::after {
-    animation-duration:.01ms !important;
-    animation-iteration-count:1 !important;
-    transition-duration:.01ms !important;
-    scroll-behavior:auto !important;
+    animation:none !important;
+    transition:none !important;
   }
   .js .reveal {
     opacity:1;
@@ -342,12 +419,12 @@ main {
     <p>HELL YAAAA</p>
   </div>
 </section>
-<div class="foot reveal">
+<footer class="foot">
   ORG OS · Official Website
-</div>
+</footer>
 </main>
 <script>
-/* Scroll reveal observer */
+/* SCROLL REVEAL SYSTEM */
 const revealElements = document.querySelectorAll(".reveal");
 if ("IntersectionObserver" in window) {
   const observer = new IntersectionObserver((entries) => {
@@ -358,8 +435,8 @@ if ("IntersectionObserver" in window) {
       }
     });
   }, {
-    threshold: 0.12,
-    rootMargin: "0px 0px -40px 0px"
+    threshold:0.08,
+    rootMargin:"0px 0px -20px 0px"
   });
   revealElements.forEach(element => {
     observer.observe(element);
@@ -368,6 +445,12 @@ if ("IntersectionObserver" in window) {
   revealElements.forEach(element => {
     element.classList.add("is-visible");
   });
+}
+/* FOOTER SAFETY FALLBACK */
+const footer = document.querySelector(".foot");
+if (footer) {
+  footer.style.opacity = "1";
+  footer.style.visibility = "visible";
 }
 </script>
 </body>
